@@ -1,0 +1,3 @@
+{"_id":{"$oid":"5d732545cdf90e36a0cced36"},"__v":0}
+{"_id":{"$oid":"5d7325f5cdf90e36a0cced37"},"nombre":"pedro","rol":"contador","__v":0}
+{"_id":{"$oid":"5d732603cdf90e36a0cced38"},"nombre":"test","rol":"test","__v":0}
