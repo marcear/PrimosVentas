@@ -5,7 +5,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import UserComponent from './components/UserComponent';
+import ComponenteUsuario from './components/ComponenteUsuario';
 import { Menu } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -39,12 +39,12 @@ const MenuBar = () =>  (
 );
 
 export default class App extends Component {
-
+  
   render() {
     return (
         <div>
             <MenuBar/>
-            <UserComponent/>
+            <ComponenteUsuario/>
         </div>
         );
   }

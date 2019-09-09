@@ -5,7 +5,6 @@ const cors = require('cors');
 const PORT = 4000;
 const mongoose = require('mongoose');
 const usuariosRoutes = express.Router();
-let test = "aaa";
 
 let Usuario = require('./usuarios-model');
 
@@ -31,7 +30,6 @@ usuariosRoutes.route('/').get(function(req, res) {
 });
 
 usuariosRoutes.route('/add').post(function(req, res) {
-    debugger;
     let usuario = new Usuario(req.body);
     usuario.save()
         .then(usuario => {
