@@ -3,10 +3,18 @@ const Schema = mongoose.Schema;
 
 let Usuarios = new Schema({
     nombre: {
-        type: String
+        type: String,
+        required: true,
     },
     rol: {
         type: String
+    },
+    nombreUsuario:{
+        type: String,
+        required: true,
+        unique: true,
+        trim: true,
+        minlength: 3
     }
 });
 
