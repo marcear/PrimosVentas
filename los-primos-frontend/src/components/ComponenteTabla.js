@@ -30,24 +30,24 @@ function ponerPrimerLetraMayuscula(palabra) {
 function ComponenteTabla(props) {
     const classes = useStyles();
     let nombreColumnas = props.cols.map((col)=>{return col.nombre});
-
     return(
-    <Table>
-        <TableHead>
-            <TableRow>
-                {props.cols.map((col)=>(
-                    <TableCell key={col.id}>{ponerPrimerLetraMayuscula(col.nombre)}</TableCell>
-                ))}
-            </TableRow>
-        </TableHead>
-        <TableBody>
-          {props.filas.map((fila,index) => (
-            <TableRow key={index}>
-                <GeneraFila key={index} nombreColumnas ={nombreColumnas} fila={fila}/>
-            </TableRow>
-          ))}
-        </TableBody>
-    </Table>
+    props.filas.length > 0 && 
+      <Table>
+          <TableHead>
+              <TableRow>
+                  {props.cols.map((col)=>(
+                      <TableCell key={col.id}>{ponerPrimerLetraMayuscula(col.nombre)}</TableCell>
+                  ))}
+              </TableRow>
+          </TableHead>
+          <TableBody>
+            {props.filas.map((fila,index) => (
+              <TableRow key={index}>
+                  <GeneraFila key={index} nombreColumnas ={nombreColumnas} fila={fila}/>
+              </TableRow>
+            ))}
+          </TableBody>
+      </Table>
     );
 }
 
