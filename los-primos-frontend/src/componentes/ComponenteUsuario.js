@@ -7,17 +7,9 @@ import ComponenteTabla from './ComponenteTabla';
 import {COLUMNAS_USUARIO} from '../config';
 import axios from 'axios';
 
-const useStyles = makeStyles(theme => ({
-    fab: {
-      margin: theme.spacing(1),
-    },
-    extendedIcon: {
-      marginRight: theme.spacing(1),
-    },
-  }));
 
 function UserComponent() {
-    const classes = useStyles();
+    //const classes = useStyles();
     const[usuarios, setUsuarios] = useState([]);
 
     useEffect(() => {
@@ -31,10 +23,7 @@ function UserComponent() {
       },[]);
 
     return(
-        <div >
-            <Fab color="primary" aria-label="add" className={classes.fab}>
-                <AddIcon />
-            </Fab>
+        <div>
             <ComponenteTabla filas= {usuarios} cols= {COLUMNAS_USUARIO}/>
         </div>
     );

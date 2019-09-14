@@ -11,5 +11,4 @@ app.use('/usuarios',require('./rutas/ruta.usuarios'));
 
 app.listen(app.get('port'),()=>{
     console.log("Servidor eschuchando en el puerto " + app.get('port'));
-})
-//app.use('/usuarios', usuariosRoutes);
+});
