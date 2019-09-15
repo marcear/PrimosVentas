@@ -1,4 +1,7 @@
 import React from 'react';
+import { Link } from "react-router-dom";
+
+
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -34,16 +37,29 @@ function ComponenteBarraLateral(props) {
     const classes = useStyles();
     const theme = useTheme();
 
+    const renderLink = React.useMemo(
+      (to) =>
+        React.forwardRef((itemProps, ref) => (
+          <Link to={to} {...itemProps} innerRef={ref} />
+        )),
+      [],
+    );
+
     const OpcionesBarraLateral = () => (
         <div>
-          <List>
-            {props.opciones.map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
+            <List>
+
+                {props.opciones.map((item, index) => (
+                  <ListItem 
+                    button 
+                    key={index}
+                    component= {renderLink} to={item.path}
+                    >
+                    <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                    <ListItemText primary={item.text} />
+                  </ListItem>
+                ))}
+            </List>
         </div>
     );
     

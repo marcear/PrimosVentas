@@ -8,8 +8,7 @@ import {COLUMNAS_USUARIO} from '../config';
 import axios from 'axios';
 
 
-function UserComponent() {
-    //const classes = useStyles();
+function ComponenteUsuario(props) {
     const[usuarios, setUsuarios] = useState([]);
 
     useEffect(() => {
@@ -29,4 +28,4 @@ function UserComponent() {
     );
 }
 
-export default UserComponent;
+export default ComponenteUsuario;
