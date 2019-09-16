@@ -1,21 +1,17 @@
+//React
 import React from 'react';
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import {withRouter} from 'react-router-dom';
-
+//Componentes
 import ComponenteUsuario from './ComponenteUsuario';
 import ComponenteNav from './ComponenteNav';
 import ComponenteBarraLateral from './ComponenteBarraLateral';
+import {OPCIONES_BARRA_LATERAL} from '../config';
+import Login from './Login';
+//Material ui
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
-
-const opciones =[
-    {text:"Home", path:"/", exact:true,main:(props)=><ComponenteMain {...props} >Home</ComponenteMain>}
-    ,{text:"Usuarios", path:"/usuarios",main:(props)=><ComponenteMain {...props}><ComponenteUsuario/></ComponenteMain>}
-    ,{text:"Ventas", path:"/ventas",main:(props)=><ComponenteMain {...props}>Ventas</ComponenteMain>},
-    {text:"Default", path:"/other"}
-  ];
-  
     const useStyles = makeStyles(theme => ({
         main:{
             marginTop: theme.spacing(10),
@@ -41,8 +37,6 @@ function ComponenteMain(props) {
         setAbierta(false);
     }
 
-
-    
     return(
               <div className={classes.root}>
                   <Grid 
@@ -52,7 +46,7 @@ function ComponenteMain(props) {
                     alignItems="center"
                   >
                   <ComponenteBarraLateral 
-                      opciones={opciones}
+                      opciones={OPCIONES_BARRA_LATERAL}
                       open={abierta} 
                       cerrarDrawer={cerrarBarraLateral}
                       {...props}
@@ -65,11 +59,9 @@ function ComponenteMain(props) {
                           />
                     </Grid>
                     <Grid item xs={10} className={classes.main}>
-                        <Switch>
-                            <Route exact path="/" render={()=> <div>Home</div>}/>
-                            <Route path="/usuarios" render={()=><ComponenteUsuario/>} />
-                            <Route path="/ventas" render={()=><div>Ventas</div> }/>
-                        </Switch>
+                        <div>
+                            {props.mainComponent}
+                        </div>
                       </Grid>
                   </Grid>
               </div>
