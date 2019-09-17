@@ -31,20 +31,22 @@ function Login(props) {
     const from = props.location.pathname;
 
     const [usuario, setUsuario] = useState({
-        nombre: 'Cat in the Hat',
+        nombre: '',
         contraseña: ''
       });
 
-    const handleChange = nombre => event => {
-        setUsuario({ ...usuario, [nombre]: event.target.value });
+    const handleChange = parametro => evento => {
+        setUsuario({ ...usuario, [parametro]: evento.target.value });
     };
 
-    const handleClick = event => {
-        alert(event);
-    };
+    function handleLogin(e) {
+        e.preventDefault();
+        console.log(usuario);
+    }
+
     
         return (
-            <div className={classes.root}>
+            <form className={classes.root} onSubmit={handleLogin} >
                 <Grid 
                     container
                     spacing={3}
@@ -79,7 +81,7 @@ function Login(props) {
                                 <Button variant="contained" 
                                     color="primary" 
                                     className={classes.button}
-                                    onClick={handleClick}
+                                    type={"submit"}
                                     >
                                     Ingresar
                                 </Button>
@@ -88,7 +90,7 @@ function Login(props) {
                         </Paper>
                     </Grid>
                 </Grid>
-            </div>
+            </form>
     );
 }
 
