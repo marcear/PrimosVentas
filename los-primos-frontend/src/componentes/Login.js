@@ -23,11 +23,13 @@ const useStyles = makeStyles(theme => ({
       },
       button: {
           marginTop: theme.spacing(3)
+      },
+      hide: {
+          display: 'none'
       }
 }));
 
 function Login(props) {
-    debugger;
     const classes = useStyles();
     const [usuario, setUsuario] = useState({
         nombre: '',
@@ -35,8 +37,10 @@ function Login(props) {
       });
 
     const [redirecciona, setRedirecciona] = useState(null);
+    const [error, tieneError] = useState(false);
 
     const handleChange = parametro => evento => {
+        tieneError(null);
         setUsuario({ ...usuario, [parametro]: evento.target.value });
     };
 
@@ -46,6 +50,7 @@ function Login(props) {
             localStorage.setItem("usuario", usuario);
             setRedirecciona(true);
         }
+        tieneError(true);
     }
 //Si el usuario se logeo correctamente, lo lleva a home
     if (redirecciona) {
@@ -71,7 +76,6 @@ function Login(props) {
                                         aria-describedby="my-helper-text" 
                                         value={usuario.nombre} 
                                         onChange={handleChange('nombre')} />
-                                    <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText>
                                 </FormControl>
                             </Grid>
                             <Grid item xs={12}>
@@ -82,7 +86,7 @@ function Login(props) {
                                         value={usuario.contraseña} 
                                         onChange={handleChange('contraseña')}
                                         />
-                                    <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText>
+                                    <FormHelperText className={!error ? classes.hide : null } error={error} id="my-helper-text">usuario o contraseña incorrectos</FormHelperText>
                                 </FormControl>
                             </Grid>
                             <Grid item xs={12}>

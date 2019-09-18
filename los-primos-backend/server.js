@@ -3,7 +3,6 @@ const app = express();
 const cors = require('cors');
 const { entidades } = require('../los-primos-db/conexion');
 const {usuariosRoutes} = require('./rutas/ruta.usuarios');
-debugger;
 app.use(cors());
 app.use(express.json());
 app.set('port', process.env.PORT || 4000)

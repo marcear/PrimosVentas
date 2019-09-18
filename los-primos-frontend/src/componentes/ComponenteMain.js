@@ -5,6 +5,7 @@ import {withRouter} from 'react-router-dom';
 import ComponenteNav from './ComponenteNav';
 import ComponenteBarraLateral from './ComponenteBarraLateral';
 import {OPCIONES_BARRA_LATERAL} from '../config';
+import { cerrarSesion } from './Logout';
 //Material ui
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -23,7 +24,6 @@ import Grid from '@material-ui/core/Grid';
 }));
 
 function ComponenteMain(props) {
-    debugger;
     const classes = useStyles();
     const[abierta, setAbierta] = React.useState(false);
 
@@ -33,6 +33,10 @@ function ComponenteMain(props) {
 
     function cerrarBarraLateral() {
         setAbierta(false);
+    }
+
+    function deslogear() {
+      cerrarSesion(props);
     }
 
     return(
@@ -54,6 +58,7 @@ function ComponenteMain(props) {
                           className={classes.nav} 
                           onBarClick={abrirBarraLateral} 
                           barraLateralAbierta={abierta}
+                          cerrarSesion={deslogear}
                           />
                     </Grid>
                     <Grid item xs={10} className={classes.main}>
