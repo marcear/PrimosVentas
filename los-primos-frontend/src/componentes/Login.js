@@ -1,8 +1,9 @@
+//React
 import React from 'react';
 import { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
-
+//Material ui
 import {FormControl, InputLabel, Input, FormHelperText, Grid, Paper, Button} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -26,14 +27,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function Login(props) {
+    debugger;
     const classes = useStyles();
-    const [redireccionaALogin,setRedireccionaALogin] = useState(true);
-    const from = props.location.pathname;
-
     const [usuario, setUsuario] = useState({
         nombre: '',
         contraseña: ''
       });
+
+    const [redirecciona, setRedirecciona] = useState(null);
 
     const handleChange = parametro => evento => {
         setUsuario({ ...usuario, [parametro]: evento.target.value });
@@ -41,10 +42,18 @@ function Login(props) {
 
     function handleLogin(e) {
         e.preventDefault();
-        console.log(usuario);
+        if(usuario.nombre === "admin" && usuario.contraseña === "1234"){
+            localStorage.setItem("usuario", usuario);
+            setRedirecciona(true);
+        }
     }
-
-    
+//Si el usuario se logeo correctamente, lo lleva a home
+    if (redirecciona) {
+        props.history.push('/');
+        return (
+            <Redirect to="/"/>
+            );
+    }
         return (
             <form className={classes.root} onSubmit={handleLogin} >
                 <Grid 
@@ -57,8 +66,8 @@ function Login(props) {
                         <Paper className={classes.paper}>
                             <Grid item xs={12}>
                                 <FormControl className={classes.input}>
-                                    <InputLabel htmlFor="my-input">Usuario</InputLabel>
-                                    <Input id="my-input" 
+                                    <InputLabel htmlFor="usuario">Usuario</InputLabel>
+                                    <Input id="usuario" 
                                         aria-describedby="my-helper-text" 
                                         value={usuario.nombre} 
                                         onChange={handleChange('nombre')} />
@@ -67,8 +76,8 @@ function Login(props) {
                             </Grid>
                             <Grid item xs={12}>
                                 <FormControl className={classes.input}>
-                                    <InputLabel htmlFor="my-input">Contraseña</InputLabel>
-                                    <Input id="my-input" type="password" 
+                                    <InputLabel htmlFor="contraseña">Contraseña</InputLabel>
+                                    <Input id="contraseña" type="password" 
                                         aria-describedby="my-helper-text"
                                         value={usuario.contraseña} 
                                         onChange={handleChange('contraseña')}
@@ -94,4 +103,4 @@ function Login(props) {
     );
 }
 
-export default Login
+export default Login;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 
 import Drawer from '@material-ui/core/Drawer';
@@ -56,7 +56,7 @@ function ComponenteBarraLateral(props) {
                     button 
                     key={index}
                     component= {renderLink} to={item.path}
-                    selected= {opcionElegida == index}
+                    selected= {opcionElegida === index}
                     onClick={() => setOpcionElegida(index)}
                     >
                     <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>

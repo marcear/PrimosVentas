@@ -1,13 +1,10 @@
 //React
 import React from 'react';
-import { Route, Switch, Redirect } from "react-router-dom";
 import {withRouter} from 'react-router-dom';
 //Componentes
-import ComponenteUsuario from './ComponenteUsuario';
 import ComponenteNav from './ComponenteNav';
 import ComponenteBarraLateral from './ComponenteBarraLateral';
 import {OPCIONES_BARRA_LATERAL} from '../config';
-import Login from './Login';
 //Material ui
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -26,6 +23,7 @@ import Grid from '@material-ui/core/Grid';
 }));
 
 function ComponenteMain(props) {
+    debugger;
     const classes = useStyles();
     const[abierta, setAbierta] = React.useState(false);
 
