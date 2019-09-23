@@ -1,4 +1,4 @@
 export const cerrarSesion = (props)=>{
-    localStorage.setItem("usuario", null);
+    localStorage.removeItem("usuario");
     props.history.push('/login');
 }

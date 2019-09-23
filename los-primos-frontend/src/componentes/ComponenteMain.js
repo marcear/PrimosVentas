@@ -39,6 +39,8 @@ function ComponenteMain(props) {
       cerrarSesion(props);
     }
 
+ 
+
     return(
               <div className={classes.root}>
                   <Grid 

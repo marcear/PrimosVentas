@@ -8,17 +8,15 @@ import Login from './componentes/Login';
 
 
 function App() {
-
     const logeado = localStorage.getItem("usuario") != null;
 
     return (
           <Router>
-              <Switch> */}
-                    /<Route exact path="/" render={()=> logeado ? <ComponenteMain mainComponent={<div>Home</div>} /> : <Redirect to="/login" /> } />
-                    <Route  path="/usuarios" render={()=> logeado ? <ComponenteMain mainComponent={<ComponenteUsuario/>} /> : <Redirect to="/login" /> } />
-                    <Route  path="/ventas" render={()=> (logeado ? <ComponenteMain mainComponent={<div>Ventas</div>} /> : <Redirect to="/login" />) } />
-                    <Route  path="/login" component={Login} />
-                    <Route  path="*" render={()=> <div>No encontrado</div>} /> }
+              <Switch>
+              <Route exact path="/" render={(props) => logeado ? <ComponenteMain mainComponent={<div>Home</div>} {...props} /> : <Redirect to="/login" /> }  />
+                    <Route  path="/usuarios" render={() => logeado ? <ComponenteMain mainComponent={<ComponenteUsuario/>} /> : <Redirect to="/login" /> } />
+                    <Route  path="/ventas" render={() => (logeado ? <ComponenteMain mainComponent={<div>Ventas</div>} /> : <Redirect to="/login" />) } />
+                    <Route  path="/login" render={(props) => <Login {...props} />}/>
                  </Switch>
           </Router>
         );

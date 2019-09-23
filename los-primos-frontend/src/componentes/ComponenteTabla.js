@@ -19,9 +19,9 @@ const useStyles = makeStyles(theme => ({
   }));
 
 const GeneraFila = (props) =>{
-return props.nombreColumnas.map((key,index)=>{
-    return <TableCell key={index}>{props.fila[key]}</TableCell>
-})
+  return props.nombreColumnas.map((key,index)=>{
+      return <TableCell key={index}>{props.fila[key]}</TableCell>
+  });
 }
 
 function ponerPrimerLetraMayuscula(palabra) {

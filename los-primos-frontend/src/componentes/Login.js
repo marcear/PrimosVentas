@@ -6,6 +6,11 @@ import { Redirect } from 'react-router-dom';
 //Material ui
 import {FormControl, InputLabel, Input, FormHelperText, Grid, Paper, Button} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+//Componentes
+import { loginUsuario } from '../controladores/usuarioControlador';
+
 
 const useStyles = makeStyles(theme => ({
     root:{
@@ -26,41 +31,73 @@ const useStyles = makeStyles(theme => ({
       },
       hide: {
           display: 'none'
+      },
+      cargandoContainer: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingTop: theme.spacing(100)
       }
 }));
 
+
 function Login(props) {
     const classes = useStyles();
+    const [cargando, setCargando] = useState(false);
     const [usuario, setUsuario] = useState({
         nombre: '',
         contraseña: ''
       });
 
-    const [redirecciona, setRedirecciona] = useState(null);
+    const [redirecciona, setRedirecciona] = useState(false);
     const [error, tieneError] = useState(false);
+    const from = props.location.state || { from: { pathname: "/" } };
 
     const handleChange = parametro => evento => {
         tieneError(null);
         setUsuario({ ...usuario, [parametro]: evento.target.value });
     };
 
-    function handleLogin(e) {
+    async function handleLogin(e) {
         e.preventDefault();
-        if(usuario.nombre === "admin" && usuario.contraseña === "1234"){
-            localStorage.setItem("usuario", usuario);
-            setRedirecciona(true);
+        if(usuario.nombre != null && usuario.contraseña != null) {
+            setCargando(true);
+            const res = await loginUsuario(usuario);
+            //Logeado correctamente, entonces guardo el token
+            if(res.status == 200) {
+                localStorage.setItem("token", res.data);
+                props.history.push("/");
+                setRedirecciona(true);
+            }
         }
-        tieneError(true);
+        else{
+            tieneError(true);
+        }
+
+        setCargando(false);
+
     }
+
+    const Cargando = () => {
+        return (
+        <div className={classes.cargandoContainer}>
+            <CircularProgress className= {classes.cargandoItem} />
+        </div>
+        )};
+
+
 //Si el usuario se logeo correctamente, lo lleva a home
+
+    if(cargando) { 
+        return (<Cargando />);
+    }
+
     if (redirecciona) {
-        props.history.push('/');
-        return (
-            <Redirect to="/"/>
-            );
+        //props.history.push('/');
+        return (<Redirect to={from}/>) ;
     }
         return (
-            <form className={classes.root} onSubmit={handleLogin} >
+            <form className={classes.root} onSubmit={(e)=>{handleLogin(e)}} >
                 <Grid 
                     container
                     spacing={3}
